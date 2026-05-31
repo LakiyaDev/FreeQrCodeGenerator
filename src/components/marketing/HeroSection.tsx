@@ -14,7 +14,7 @@ export function HeroSection() {
           <span className="text-brand-600 dark:text-brand-400">that never expire</span>
         </h1>
         <p className="mt-4 text-base text-slate-600 sm:text-lg dark:text-slate-300">
-          Generate customizable QR codes for URLs, text, phone, email, and Wi-Fi.
+          Generate customizable QR codes for URLs, text, phone, email and Wi-Fi.
           Your data is encoded directly — no redirects, works offline, free forever.
         </p>
       </div>

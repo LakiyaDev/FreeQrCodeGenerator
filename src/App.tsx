@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { lazy, Suspense, useCallback, useState } from 'react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { HeroSection } from '@/components/marketing/HeroSection';
@@ -8,6 +8,22 @@ import { QrGenerator } from '@/components/generator/QrGenerator';
 import { HistorySection } from '@/components/history/HistorySection';
 import { QrHistoryProvider, useQrHistoryContext } from '@/context/QrHistoryContext';
 import type { QrHistoryItem } from '@/types';
+
+const QrScannerSection = lazy(() =>
+  import('@/components/scanner/QrScannerSection').then((m) => ({
+    default: m.QrScannerSection,
+  })),
+);
+
+function ScannerFallback() {
+  return (
+    <section className="border-t border-slate-200 bg-slate-50 py-16">
+      <div className="mx-auto max-w-7xl px-4 text-center text-sm text-slate-500">
+        Loading scanner…
+      </div>
+    </section>
+  );
+}
 
 function AppContent() {
   const { history, removeItem, clear } = useQrHistoryContext();
@@ -30,7 +46,7 @@ function AppContent() {
           <QrGenerator key={restoreKey} />
         </div>
 
-        <div className="border-t border-slate-200 bg-slate-50/50 py-16 dark:border-slate-800 dark:bg-slate-900/30">
+        <div className="border-t border-slate-200 bg-slate-50/50 py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <HistorySection
               history={history}
@@ -42,6 +58,9 @@ function AppContent() {
         </div>
 
         <HowItWorks />
+        <Suspense fallback={<ScannerFallback />}>
+          <QrScannerSection />
+        </Suspense>
         <FaqSection />
       </main>
 
