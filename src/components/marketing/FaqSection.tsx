@@ -9,7 +9,7 @@ interface FaqItem {
 }
 
 const FAQ_CATEGORIES: { id: FaqCategory; label: string }[] = [
-  { id: 'basics', label: 'Basics' },
+  { id: 'basics', label: 'Basics functions' },
   { id: 'generating', label: 'Generating & designing' },
   { id: 'scanning', label: 'Scanning & printing' },
 ];
@@ -90,23 +90,23 @@ export function FaqSection() {
     <section
       id="faq"
       aria-labelledby="faq-heading"
-      className="scroll-mt-20 border-t border-slate-200 bg-slate-50 py-16 sm:py-20"
+      className="scroll-mt-20 border-t border-slate-200 bg-slate-50 py-12 sm:py-16 lg:py-20"
     >
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 text-center">
+        <div className="mb-8 text-center sm:mb-10">
           <h2
             id="faq-heading"
-            className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl"
+            className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl xl:text-4xl"
           >
             Most common questions about our service
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-base text-slate-600 sm:text-lg">
+          <p className="mx-auto mt-2 max-w-xl text-sm text-slate-600 sm:mt-3 sm:text-base lg:text-lg">
             Get answers to your questions about QR codes
           </p>
         </div>
 
         <div
-          className="mb-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3"
+          className="-mx-4 mb-6 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:mb-8 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0 sm:gap-3"
           role="tablist"
           aria-label="FAQ categories"
         >
@@ -120,7 +120,7 @@ export function FaqSection() {
                 aria-selected={isActive}
                 onClick={() => handleCategoryChange(id)}
                 className={[
-                  'rounded-full px-4 py-2 text-sm font-semibold transition-colors sm:px-5 sm:py-2.5',
+                  'shrink-0 rounded-full px-3.5 py-2 text-xs font-semibold transition-colors sm:px-5 sm:py-2.5 sm:text-sm',
                   isActive
                     ? 'bg-brand-600 text-white shadow-sm'
                     : 'text-slate-600 hover:bg-white hover:text-slate-900',
@@ -148,9 +148,9 @@ export function FaqSection() {
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                   aria-expanded={isOpen}
-                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-slate-50 sm:px-6 sm:py-5"
+                  className="flex w-full items-start justify-between gap-3 px-4 py-3.5 text-left transition-colors hover:bg-slate-50 sm:items-center sm:gap-4 sm:px-6 sm:py-5"
                 >
-                  <span className="text-sm font-semibold text-slate-900 sm:text-base">
+                  <span className="text-sm font-semibold leading-snug text-slate-900 sm:text-base">
                     {item.q}
                   </span>
                   <ChevronDown

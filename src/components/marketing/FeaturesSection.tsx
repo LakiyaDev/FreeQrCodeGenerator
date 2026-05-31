@@ -58,17 +58,17 @@ export function FeaturesSection() {
     <section
       id="features"
       aria-labelledby="features-heading"
-      className="scroll-mt-20 border-t border-slate-200 bg-white py-16 sm:py-20"
+      className="scroll-mt-20 border-t border-slate-200 bg-white py-12 sm:py-16 lg:py-20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto mb-12 max-w-4xl text-center sm:mb-14">
+        <div className="mx-auto mb-8 max-w-4xl text-center sm:mb-12 lg:mb-14">
           <h2
             id="features-heading"
-            className="mx-auto w-full text-center text-xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl xl:text-4xl"
+            className="mx-auto w-full text-center text-lg font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl xl:text-4xl"
           >
             Free QR Generator, the most advanced QR code generator
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
+          <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:mt-4 sm:text-base lg:text-lg">
             Packed with useful features, our easy-to-use QR code generator helps you create
             professional codes for marketing, customer experience and everyday sharing — free
             forever, with no account required.
@@ -82,7 +82,7 @@ export function FeaturesSection() {
               return (
                 <article
                   key={feature.title}
-                  className="flex flex-col items-center bg-white px-6 py-10 text-center sm:px-8 sm:py-12"
+                  className="flex flex-col items-center bg-white px-5 py-8 text-center sm:px-8 sm:py-10 lg:py-12"
                 >
                   <span className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
                     <Icon className="h-8 w-8" aria-hidden />

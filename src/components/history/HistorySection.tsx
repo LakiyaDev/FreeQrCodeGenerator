@@ -39,25 +39,25 @@ export function HistorySection({
 
   return (
     <section id="history" aria-labelledby="history-heading">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
+      <div className="mb-4 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0">
           <h2
             id="history-heading"
-            className="text-xl font-bold text-slate-900 dark:text-white"
+            className="text-lg font-bold text-slate-900 dark:text-white sm:text-xl"
           >
             Recent QR Codes
           </h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-slate-500 dark:text-slate-400 sm:text-sm">
             Stored in your browser — up to 24 items
           </p>
         </div>
-        <Button variant="ghost" size="sm" onClick={onClear}>
+        <Button variant="ghost" size="sm" onClick={onClear} className="self-start shrink-0">
           <Trash2 className="h-4 w-4" />
           Clear all
         </Button>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-6">
         {history.map((item) => (
           <article
             key={item.id}
@@ -84,7 +84,7 @@ export function HistorySection({
             <button
               type="button"
               onClick={() => onRemove(item.id)}
-              className="absolute right-1 top-1 rounded-full bg-white/90 p-1 opacity-0 shadow transition-opacity group-hover:opacity-100 dark:bg-slate-900/90"
+              className="absolute right-1 top-1 rounded-full bg-white/90 p-1.5 opacity-100 shadow sm:opacity-0 sm:transition-opacity sm:group-hover:opacity-100 dark:bg-slate-900/90"
               aria-label={`Remove ${item.displayLabel} from history`}
             >
               <X className="h-3.5 w-3.5 text-slate-500" />

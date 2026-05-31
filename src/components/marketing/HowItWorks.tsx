@@ -20,19 +20,19 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" aria-labelledby="how-it-works-heading" className="scroll-mt-20 py-16">
+    <section id="how-it-works" aria-labelledby="how-it-works-heading" className="scroll-mt-20 py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2
           id="how-it-works-heading"
-          className="mb-10 text-center text-2xl font-bold text-slate-900 dark:text-white"
+          className="mb-8 text-center text-xl font-bold text-slate-900 dark:text-white sm:mb-10 sm:text-2xl"
         >
           How it works
         </h2>
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-3 md:gap-8">
           {STEPS.map((step, i) => (
             <div
               key={step.title}
-              className="relative rounded-2xl border border-slate-200 bg-white p-6 text-center dark:border-slate-700 dark:bg-slate-800/50"
+              className="relative rounded-xl border border-slate-200 bg-white p-5 text-center sm:rounded-2xl sm:p-6 dark:border-slate-700 dark:bg-slate-800/50"
             >
               <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-100 text-brand-600 dark:bg-brand-900/50 dark:text-brand-400">
                 <step.icon className="h-6 w-6" aria-hidden />

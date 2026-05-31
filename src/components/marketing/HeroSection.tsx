@@ -15,8 +15,12 @@ function HeroQrVisual() {
   ];
 
   return (
-    <div className="relative mx-auto w-full max-w-[240px] md:max-w-[260px] lg:max-w-[300px] xl:max-w-[320px]" aria-hidden>
-      <div className="absolute -inset-4 rounded-3xl bg-brand-400/20 blur-2xl" />
+    <div className="relative isolate mx-auto w-full max-w-[240px] md:max-w-[260px] lg:max-w-[300px] xl:max-w-[320px]">
+      {/* Glow stays behind the card — no negative inset so it cannot bleed over CTAs above */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 rounded-3xl bg-brand-400/25 blur-xl md:bg-brand-400/20 md:blur-2xl"
+        aria-hidden
+      />
       <div className="relative rounded-2xl border border-white/60 bg-white/90 p-4 shadow-2xl shadow-brand-500/20 backdrop-blur-sm sm:p-5">
         <div className="mb-3 flex items-center justify-between">
           <span className="text-xs font-semibold uppercase tracking-wider text-brand-600">
@@ -62,26 +66,19 @@ const TRUST_ITEMS = [
 ];
 
 /**
- * Responsive hero dimensions (full-width banner, CSS-only):
- * - Mobile  (<768px):   9:16 → 1:1, max height 1200px
- * - Tablet  (768–1279): 3:2 aspect, height 500–720px
- * - Desktop (1280–1535): 16:9 aspect, height 800–1080px
- * - Ultrawide (1536+):  21:9 aspect, max height 1080px
+ * Hero layout:
+ * - Mobile: copy → CTAs → QR preview → trust badges (QR never overlaps copy/CTAs)
+ * - md+: two columns — copy left, QR preview right
  */
 export function HeroSection() {
   return (
     <section
       aria-labelledby="hero-heading"
       className={[
-        'relative flex w-full items-center overflow-hidden',
-        /* Mobile — portrait 9:16, up to 1200px */
-        'aspect-[9/16] min-h-[600px] max-h-[1200px]',
-        'sm:aspect-square sm:min-h-[640px] sm:max-h-[min(100svh,1200px)]',
-        /* Tablet — 3:2, 500–720px */
-        'md:aspect-[3/2] md:min-h-[500px] md:max-h-[720px]',
-        /* Desktop — 16:9, 800–1080px */
+        'relative flex w-full items-center overflow-x-hidden overflow-y-visible',
+        'py-10 pb-12 sm:py-12 sm:pb-14',
+        'md:overflow-hidden md:aspect-[3/2] md:min-h-[500px] md:max-h-[720px] md:py-0 md:pb-0',
         'xl:aspect-[16/9] xl:min-h-[800px] xl:max-h-[1080px]',
-        /* Ultrawide — 21:9 cinematic */
         '2xl:aspect-[21/9] 2xl:max-h-[1080px]',
       ].join(' ')}
     >
@@ -116,18 +113,17 @@ export function HeroSection() {
       />
 
       {/* Content — centered within hero, readable max-width */}
-      <div className="relative z-10 mx-auto w-full max-w-[2560px] px-4 py-10 sm:px-6 sm:py-12 md:px-8 md:py-14 lg:px-12 lg:py-16 xl:px-16">
-        <div className="mx-auto grid w-full max-w-7xl items-center gap-10 md:grid-cols-2 md:gap-12 lg:gap-x-20 lg:gap-y-8">
-          {/* Copy + CTAs */}
+      <div className="relative z-10 mx-auto w-full max-w-[2560px] px-4 py-2 sm:px-6 md:px-8 md:py-14 lg:px-12 lg:py-16 xl:px-16">
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-8 md:grid-cols-2 md:gap-12 lg:gap-x-20 lg:gap-y-8">
           <div className="flex flex-col justify-center text-center md:text-left">
-            <span className="mb-4 inline-flex w-fit items-center gap-2 self-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white backdrop-blur-sm sm:mb-5 md:self-start">
+            <span className="mb-3 inline-flex w-fit max-w-full items-center gap-2 self-center rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm sm:mb-4 sm:px-4 sm:text-sm md:self-start">
               <Sparkles className="h-4 w-4 shrink-0 text-brand-200" aria-hidden />
               100% Free · No signup required
             </span>
 
             <h1
               id="hero-heading"
-              className="text-[clamp(1.875rem,5vw,4.5rem)] font-bold leading-[1.08] tracking-tight text-white"
+              className="text-[clamp(1.75rem,6vw,4.5rem)] font-bold leading-[1.1] tracking-tight text-white"
             >
               Create &amp; scan{' '}
               <span className="bg-gradient-to-r from-brand-200 to-white bg-clip-text text-transparent">
@@ -136,29 +132,33 @@ export function HeroSection() {
               in seconds
             </h1>
 
-            <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-brand-100 sm:mt-5 sm:text-lg md:mx-0 md:max-w-xl lg:text-xl">
+            <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-brand-100 sm:mt-4 sm:text-base md:mx-0 md:max-w-xl lg:text-lg xl:text-xl">
               Generate static, customizable QR codes for URLs, text, phone, email and Wi-Fi —
               or scan any code with your camera. Free forever, works offline.
             </p>
 
-            <div className="mt-7 grid grid-cols-1 gap-3 sm:mt-8 sm:grid-cols-2 md:max-w-xl">
+            <div className="relative z-10 mx-auto mt-6 grid w-full max-w-sm grid-cols-1 gap-3 min-[480px]:grid-cols-2 md:mx-0 md:max-w-none lg:max-w-xl">
               <a
                 href="#choose-type"
-                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-white px-6 text-base font-semibold text-brand-700 shadow-lg shadow-black/20 transition-colors hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-700 sm:px-8"
+                className="inline-flex min-h-12 w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-lg bg-white px-3 text-sm font-semibold text-brand-700 shadow-lg shadow-black/20 transition-colors hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-700 sm:gap-2 sm:px-4 md:px-3 md:text-[13px] lg:px-6 lg:text-base"
               >
                 <QrCode className="h-5 w-5 shrink-0" aria-hidden />
                 Generate QR Codes
               </a>
               <a
                 href="#how-it-works"
-                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg border-2 border-white/30 bg-white/10 px-6 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-700 sm:px-8"
+                className="inline-flex min-h-12 w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-lg border-2 border-white/30 bg-white/10 px-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-700 sm:gap-2 sm:px-4 md:px-3 md:text-[13px] lg:px-6 lg:text-base"
               >
                 <ScanLine className="h-5 w-5 shrink-0" aria-hidden />
                 How it Use
               </a>
             </div>
 
-            <ul className="mt-7 flex flex-wrap items-center justify-center gap-2.5 sm:mt-8 sm:gap-3 md:justify-start">
+            <div className="relative z-0 mt-8 flex justify-center md:hidden">
+              <HeroQrVisual />
+            </div>
+
+            <ul className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:mt-7 sm:gap-2.5 md:justify-start">
               {TRUST_ITEMS.map(({ icon: Icon, label }) => (
                 <li
                   key={label}
@@ -171,8 +171,8 @@ export function HeroSection() {
             </ul>
           </div>
 
-          {/* Hero visual — tablet & desktop */}
-          <div className="hidden md:flex md:items-center md:justify-center lg:justify-end">
+          {/* Hero visual — tablet & desktop only */}
+          <div className="hidden shrink-0 md:flex md:items-center md:justify-center lg:justify-end">
             <HeroQrVisual />
           </div>
         </div>

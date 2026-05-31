@@ -21,7 +21,7 @@ const SCANNER_CONFIG = {
 
 /** Shared square viewport — keeps scanner and result panels matched. */
 const PANEL_VIEWPORT_CLASS =
-  'relative aspect-square w-full overflow-hidden rounded-xl';
+  'relative mx-auto aspect-square w-full max-w-[min(100%,320px)] overflow-hidden rounded-xl sm:max-w-none';
 
 function isUrl(text: string): boolean {
   try {
@@ -167,27 +167,27 @@ export function QrScannerSection() {
     <section
       id="qr-scanner"
       aria-labelledby="qr-scanner-heading"
-      className="scroll-mt-20 border-t border-slate-200 bg-slate-50 py-16"
+      className="scroll-mt-20 border-t border-slate-200 bg-slate-50 py-12 sm:py-16"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 text-center">
-          <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700">
+        <div className="mb-8 text-center sm:mb-10">
+          <span className="mb-2 inline-flex items-center gap-2 rounded-full bg-brand-100 px-3 py-1 text-[11px] font-semibold text-brand-700 sm:mb-3 sm:text-xs">
             <ScanLine className="h-3.5 w-3.5" aria-hidden />
             Built-in scanner
           </span>
           <h2
             id="qr-scanner-heading"
-            className="text-2xl font-bold text-slate-900 sm:text-3xl"
+            className="text-xl font-bold text-slate-900 sm:text-2xl lg:text-3xl"
           >
             Scan a QR code
           </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-slate-600">
+          <p className="mx-auto mt-2 max-w-2xl text-sm text-slate-600 sm:mt-3 sm:text-base">
             Use your device camera to read any QR code instantly, or upload a photo
             containing a code. Works entirely in your browser — nothing is uploaded to a server.
           </p>
         </div>
 
-        <div className="grid items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
+        <div className="grid items-stretch gap-4 sm:gap-6 lg:grid-cols-2 lg:gap-8">
           {/* Scanner panel */}
           <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
             <div className="border-b border-slate-100 px-5 py-4 sm:px-6">

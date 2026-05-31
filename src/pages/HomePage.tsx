@@ -51,7 +51,7 @@ export function HomePage() {
       <HeroSection />
       <ChooseTypeSection />
 
-      <div className="border-t border-slate-200 bg-white py-16">
+      <div className="border-t border-slate-200 bg-white py-10 sm:py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <HistorySection
             history={history}

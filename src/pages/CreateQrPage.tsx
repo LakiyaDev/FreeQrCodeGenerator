@@ -177,17 +177,17 @@ export function CreateQrPage() {
     (content.type === 'vcard' && content.data.website.trim().length > 0);
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-slate-50">
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mb-8">
+    <div className="min-h-[calc(100dvh-4rem)] bg-slate-50 pb-24">
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+        <div className="mb-6 sm:mb-8">
           <Link
             to="/#choose-type"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 transition-colors hover:text-brand-600"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-4 w-4 shrink-0" />
             All QR types
           </Link>
-          <h1 className="mt-4 text-2xl font-bold text-slate-900 sm:text-3xl">
+          <h1 className="mt-3 text-xl font-bold leading-tight text-slate-900 sm:mt-4 sm:text-2xl lg:text-3xl">
             {step === 2
               ? `Add content to the ${meta.label} QR code`
               : `Customize your ${meta.label} QR code`}
@@ -198,7 +198,7 @@ export function CreateQrPage() {
           <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_min(280px,28%)] lg:gap-8 xl:grid-cols-[minmax(0,1fr)_min(300px,26%)] xl:gap-12">
             <div className="space-y-4">
               <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-                <div className="flex items-start gap-3 border-b border-slate-100 p-5">
+                <div className="flex items-start gap-3 border-b border-slate-100 p-4 sm:p-5">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50">
                     <Icon className="h-5 w-5 text-brand-600" />
                   </span>
@@ -208,7 +208,7 @@ export function CreateQrPage() {
                   </div>
                   <ChevronUp className="h-5 w-5 shrink-0 text-slate-400" aria-hidden />
                 </div>
-                <div className="p-5">
+                <div className="p-4 sm:p-5">
                   <ContentForm
                     content={content}
                     onChange={setContent}
@@ -278,7 +278,7 @@ export function CreateQrPage() {
 
         {step === 3 && (
           <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-10 xl:gap-12">
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:min-h-full">
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6 lg:min-h-full">
               <h2 className="mb-4 text-lg font-semibold text-slate-900">
                 Design your QR code
               </h2>
@@ -288,7 +288,7 @@ export function CreateQrPage() {
               />
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:sticky lg:top-24 lg:self-start">
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6 lg:sticky lg:top-24 lg:self-start">
               <div className="flex w-full flex-col">
                 <div className="mx-auto w-full max-w-[320px]">
                   <QrPreview
@@ -324,25 +324,35 @@ export function CreateQrPage() {
       </div>
 
       {/* Bottom wizard bar */}
-      <div className="sticky bottom-0 border-t border-slate-200 bg-white/95 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-          <Button variant="ghost" onClick={handleBack} className="order-2 sm:order-1">
-            <ArrowLeft className="h-4 w-4" />
+      <div className="sticky bottom-0 border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-sm">
+        <div className="mx-auto max-w-7xl px-4 py-3 sm:flex sm:items-center sm:justify-between sm:px-6 sm:py-4 lg:px-8">
+          <Button
+            variant="ghost"
+            onClick={handleBack}
+            className="mb-3 hidden min-h-10 sm:mb-0 sm:inline-flex"
+          >
+            <ArrowLeft className="h-4 w-4 shrink-0" />
             Back
           </Button>
 
-          <div className="order-1 sm:order-2">
+          <div className="sm:flex-1">
             <StepIndicator currentStep={step} />
           </div>
 
-          {step === 2 ? (
-            <Button onClick={handleNext} className="order-3 sm:order-3">
-              Next
-              <ArrowRight className="h-4 w-4" />
+          <div className="mt-3 flex items-center gap-3 sm:mt-0 sm:contents">
+            <Button variant="ghost" onClick={handleBack} className="min-h-10 flex-1 sm:hidden">
+              <ArrowLeft className="h-4 w-4 shrink-0" />
+              Back
             </Button>
-          ) : (
-            <div className="order-3 hidden w-[88px] sm:block" aria-hidden />
-          )}
+            {step === 2 ? (
+              <Button onClick={handleNext} className="min-h-10 flex-1 sm:flex-none">
+                Next
+                <ArrowRight className="h-4 w-4 shrink-0" />
+              </Button>
+            ) : (
+              <div className="hidden min-h-10 w-[88px] sm:block" aria-hidden />
+            )}
+          </div>
         </div>
       </div>
     </div>

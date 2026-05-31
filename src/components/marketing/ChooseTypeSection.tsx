@@ -8,7 +8,7 @@ export function ChooseTypeSection() {
     <section
       id="choose-type"
       aria-labelledby="choose-type-heading"
-      className="scroll-mt-20 bg-slate-50 pt-6 pb-12 sm:pt-8 sm:pb-16"
+      className="scroll-mt-20 bg-slate-50 pt-5 pb-10 sm:pt-8 sm:pb-16"
     >
       <div className="mx-auto w-full max-w-[2560px] px-4 sm:px-6 lg:px-12 xl:px-16">
         <div className="mx-auto max-w-7xl">
