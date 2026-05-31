@@ -1,10 +1,20 @@
 /** Supported QR content types — each encodes data directly (static, non-expiring). */
-export type ContentType = 'url' | 'text' | 'phone' | 'email' | 'wifi';
+export type ContentType =
+  | 'url'
+  | 'vcard'
+  | 'pdf'
+  | 'images'
+  | 'social'
+  | 'video'
+  | 'text'
+  | 'wifi'
+  | 'app'
+  | 'menu'
+  | 'phone'
+  | 'email';
 
-/** Error correction levels per QR spec. Higher = more redundancy, larger code. */
 export type ErrorCorrectionLevel = 'L' | 'M' | 'Q' | 'H';
 
-/** Visual frame styles around the QR code. */
 export type FrameStyle =
   | 'none'
   | 'simple'
@@ -13,14 +23,11 @@ export type FrameStyle =
   | 'scan-me'
   | 'banner';
 
-/** Download / export formats. */
 export type DownloadFormat = 'png' | 'svg' | 'pdf' | 'jpg';
 
-/** Wi-Fi encryption types for WIFI: QR payload. */
 export type WifiEncryption = 'WPA' | 'WEP' | 'nopass';
 
-/** Form field values per content type. */
-export interface UrlContent {
+export interface LinkContent {
   url: string;
 }
 
@@ -45,14 +52,34 @@ export interface WifiContent {
   hidden: boolean;
 }
 
-export type ContentData =
-  | { type: 'url'; data: UrlContent }
-  | { type: 'text'; data: TextContent }
-  | { type: 'phone'; data: PhoneContent }
-  | { type: 'email'; data: EmailContent }
-  | { type: 'wifi'; data: WifiContent };
+export interface VCardContent {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  company: string;
+  website: string;
+}
 
-/** QR visual customization options. */
+export interface AppContent {
+  iosUrl: string;
+  androidUrl: string;
+}
+
+export type ContentData =
+  | { type: 'url'; data: LinkContent }
+  | { type: 'pdf'; data: LinkContent }
+  | { type: 'images'; data: LinkContent }
+  | { type: 'social'; data: LinkContent }
+  | { type: 'video'; data: LinkContent }
+  | { type: 'menu'; data: LinkContent }
+  | { type: 'text'; data: TextContent }
+  | { type: 'vcard'; data: VCardContent }
+  | { type: 'wifi'; data: WifiContent }
+  | { type: 'app'; data: AppContent }
+  | { type: 'phone'; data: PhoneContent }
+  | { type: 'email'; data: EmailContent };
+
 export interface QrCustomization {
   foregroundColor: string;
   backgroundColor: string;
@@ -63,7 +90,6 @@ export interface QrCustomization {
   logoSize: number;
 }
 
-/** A saved entry in localStorage history. */
 export interface QrHistoryItem {
   id: string;
   contentType: ContentType;
@@ -71,7 +97,6 @@ export interface QrHistoryItem {
   displayLabel: string;
   customization: QrCustomization;
   createdAt: number;
-  /** Thumbnail as data URL for quick preview in history grid. */
   thumbnail: string;
 }
 
@@ -91,11 +116,18 @@ export const DEFAULT_CUSTOMIZATION: QrCustomization = {
 };
 
 export const CONTENT_TYPE_LABELS: Record<ContentType, string> = {
-  url: 'URL',
-  text: 'Text',
+  url: 'Website URL',
+  vcard: 'vCard',
+  pdf: 'PDF',
+  images: 'Images',
+  social: 'Social Media',
+  video: 'Video',
+  text: 'Simple Text',
+  wifi: 'Wi-Fi',
+  app: 'App',
+  menu: 'Menu',
   phone: 'Phone',
   email: 'Email',
-  wifi: 'Wi-Fi',
 };
 
 export const ERROR_CORRECTION_OPTIONS: {

@@ -164,7 +164,7 @@ export function QrScannerSection() {
     <section
       id="qr-scanner"
       aria-labelledby="qr-scanner-heading"
-      className="border-t border-slate-200 bg-slate-50 py-16"
+      className="scroll-mt-20 border-t border-slate-200 bg-slate-50 py-16"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">

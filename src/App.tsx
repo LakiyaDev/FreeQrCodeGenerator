@@ -1,70 +1,22 @@
-import { lazy, Suspense, useCallback, useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { HeroSection } from '@/components/marketing/HeroSection';
-import { HowItWorks } from '@/components/marketing/HowItWorks';
-import { FaqSection } from '@/components/marketing/FaqSection';
-import { QrGenerator } from '@/components/generator/QrGenerator';
-import { HistorySection } from '@/components/history/HistorySection';
-import { QrHistoryProvider, useQrHistoryContext } from '@/context/QrHistoryContext';
-import type { QrHistoryItem } from '@/types';
+import { HomePage } from '@/pages/HomePage';
+import { CreateQrPage } from '@/pages/CreateQrPage';
+import { QrHistoryProvider } from '@/context/QrHistoryContext';
 
-const QrScannerSection = lazy(() =>
-  import('@/components/scanner/QrScannerSection').then((m) => ({
-    default: m.QrScannerSection,
-  })),
-);
-
-function ScannerFallback() {
-  return (
-    <section className="border-t border-slate-200 bg-slate-50 py-16">
-      <div className="mx-auto max-w-7xl px-4 text-center text-sm text-slate-500">
-        Loading scanner…
-      </div>
-    </section>
-  );
-}
-
-function AppContent() {
-  const { history, removeItem, clear } = useQrHistoryContext();
-  const [restoreKey, setRestoreKey] = useState(0);
-
-  const handleRestore = useCallback((item: QrHistoryItem) => {
-    sessionStorage.setItem('qr-restore', JSON.stringify(item));
-    setRestoreKey((k) => k + 1);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
-
+function AppLayout({
+  children,
+  showFooter = true,
+}: {
+  children: React.ReactNode;
+  showFooter?: boolean;
+}) {
   return (
     <div className="flex min-h-screen flex-col bg-white">
       <Header />
-
-      <main className="flex-1">
-        <HeroSection />
-
-        <div className="pb-16">
-          <QrGenerator key={restoreKey} />
-        </div>
-
-        <div className="border-t border-slate-200 bg-slate-50/50 py-16">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <HistorySection
-              history={history}
-              onRestore={handleRestore}
-              onRemove={removeItem}
-              onClear={clear}
-            />
-          </div>
-        </div>
-
-        <HowItWorks />
-        <Suspense fallback={<ScannerFallback />}>
-          <QrScannerSection />
-        </Suspense>
-        <FaqSection />
-      </main>
-
-      <Footer />
+      <main className="flex-1">{children}</main>
+      {showFooter && <Footer />}
     </div>
   );
 }
@@ -72,7 +24,26 @@ function AppContent() {
 export default function App() {
   return (
     <QrHistoryProvider>
-      <AppContent />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <AppLayout>
+                <HomePage />
+              </AppLayout>
+            }
+          />
+          <Route
+            path="/create/:slug"
+            element={
+              <AppLayout showFooter={false}>
+                <CreateQrPage />
+              </AppLayout>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </QrHistoryProvider>
   );
 }

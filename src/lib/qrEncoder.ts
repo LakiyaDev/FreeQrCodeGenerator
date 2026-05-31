@@ -1,25 +1,58 @@
 import type {
   ContentData,
   ContentType,
+  LinkContent,
   ValidationResult,
   WifiEncryption,
 } from '@/types';
+import { CONTENT_TYPE_LABELS } from '@/types';
+import { LINK_BASED_TYPES } from '@/config/contentTypes';
 
-/** Escape special characters in Wi-Fi QR strings per spec. */
+function isLinkContent(
+  content: ContentData,
+): content is Extract<ContentData, { data: LinkContent }> {
+  return LINK_BASED_TYPES.includes(content.type);
+}
+
 function escapeWifi(value: string): string {
   return value.replace(/([\\;,:"])/g, '\\$1');
 }
 
-/** Build the raw string encoded into the QR code (static, no redirect). */
+function normalizeUrl(url: string): string {
+  const trimmed = url.trim();
+  if (!trimmed) return '';
+  return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+}
+
+function buildVCard(data: ContentData & { type: 'vcard' }): string {
+  const { firstName, lastName, phone, email, company, website } = data.data;
+  const lines = ['BEGIN:VCARD', 'VERSION:3.0'];
+  const fn = [firstName, lastName].filter(Boolean).join(' ').trim();
+  if (fn) lines.push(`FN:${fn}`);
+  if (phone.trim()) lines.push(`TEL:${phone.trim()}`);
+  if (email.trim()) lines.push(`EMAIL:${email.trim()}`);
+  if (company.trim()) lines.push(`ORG:${company.trim()}`);
+  if (website.trim()) lines.push(`URL:${normalizeUrl(website)}`);
+  lines.push('END:VCARD');
+  return lines.join('\n');
+}
+
+function validateUrl(url: string, label = 'URL'): ValidationResult {
+  if (!url.trim()) return { valid: false, message: `Please enter a ${label}.` };
+  try {
+    new URL(normalizeUrl(url));
+    return { valid: true };
+  } catch {
+    return { valid: false, message: `Please enter a valid ${label} (e.g. example.com).` };
+  }
+}
+
 export function encodeQrContent(content: ContentData): string {
+  if (isLinkContent(content)) {
+    return normalizeUrl(content.data.url);
+  }
+
   switch (content.type) {
-    case 'url': {
-      let url = content.data.url.trim();
-      if (!/^https?:\/\//i.test(url)) {
-        url = `https://${url}`;
-      }
-      return url;
-    }
     case 'text':
       return content.data.text.trim();
     case 'phone': {
@@ -40,16 +73,25 @@ export function encodeQrContent(content: ContentData): string {
       const pass = enc === 'nopass' ? '' : escapeWifi(password);
       return `WIFI:T:${enc};S:${escapeWifi(ssid)};P:${pass};H:${hidden ? 'true' : 'false'};;`;
     }
+    case 'vcard':
+      return buildVCard(content);
+    case 'app': {
+      const { iosUrl, androidUrl } = content.data;
+      if (iosUrl.trim()) return normalizeUrl(iosUrl);
+      if (androidUrl.trim()) return normalizeUrl(androidUrl);
+      return '';
+    }
     default:
       return '';
   }
 }
 
-/** Human-readable label for history and UI. */
 export function getDisplayLabel(content: ContentData): string {
+  if (isLinkContent(content)) {
+    return content.data.url.trim().slice(0, 60) || CONTENT_TYPE_LABELS[content.type];
+  }
+
   switch (content.type) {
-    case 'url':
-      return content.data.url.trim() || 'URL';
     case 'text':
       return content.data.text.trim().slice(0, 60) || 'Text';
     case 'phone':
@@ -58,25 +100,23 @@ export function getDisplayLabel(content: ContentData): string {
       return content.data.email.trim() || 'Email';
     case 'wifi':
       return content.data.ssid.trim() || 'Wi-Fi';
+    case 'vcard': {
+      const name = [content.data.firstName, content.data.lastName].filter(Boolean).join(' ');
+      return name || 'vCard';
+    }
+    case 'app':
+      return content.data.iosUrl.trim() || content.data.androidUrl.trim() || 'App';
     default:
       return 'QR Code';
   }
 }
 
-/** Validate form input before generating QR code. */
 export function validateContent(content: ContentData): ValidationResult {
+  if (isLinkContent(content)) {
+    return validateUrl(content.data.url);
+  }
+
   switch (content.type) {
-    case 'url': {
-      const url = content.data.url.trim();
-      if (!url) return { valid: false, message: 'Please enter a URL.' };
-      try {
-        const normalized = /^https?:\/\//i.test(url) ? url : `https://${url}`;
-        new URL(normalized);
-        return { valid: true };
-      } catch {
-        return { valid: false, message: 'Please enter a valid URL (e.g. example.com).' };
-      }
-    }
     case 'text': {
       if (!content.data.text.trim()) {
         return { valid: false, message: 'Please enter some text.' };
@@ -97,8 +137,7 @@ export function validateContent(content: ContentData): ValidationResult {
     case 'email': {
       const email = content.data.email.trim();
       if (!email) return { valid: false, message: 'Please enter an email address.' };
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         return { valid: false, message: 'Please enter a valid email address.' };
       }
       return { valid: true };
@@ -111,16 +150,39 @@ export function validateContent(content: ContentData): ValidationResult {
       }
       return { valid: true };
     }
+    case 'vcard': {
+      const { firstName, lastName, phone, email } = content.data;
+      if (!firstName.trim() && !lastName.trim() && !phone.trim() && !email.trim()) {
+        return { valid: false, message: 'Please enter at least a name, phone, or email.' };
+      }
+      return { valid: true };
+    }
+    case 'app': {
+      const { iosUrl, androidUrl } = content.data;
+      if (!iosUrl.trim() && !androidUrl.trim()) {
+        return { valid: false, message: 'Please enter at least one app store URL.' };
+      }
+      if (iosUrl.trim()) {
+        const r = validateUrl(iosUrl, 'App Store URL');
+        if (!r.valid) return r;
+      }
+      if (androidUrl.trim()) {
+        const r = validateUrl(androidUrl, 'Google Play URL');
+        if (!r.valid) return r;
+      }
+      return { valid: true };
+    }
     default:
       return { valid: false, message: 'Unknown content type.' };
   }
 }
 
-/** Default empty form state per content type. */
 export function getDefaultContentData(type: ContentType): ContentData {
+  if (LINK_BASED_TYPES.includes(type)) {
+    return { type, data: { url: '' } } as ContentData;
+  }
+
   switch (type) {
-    case 'url':
-      return { type: 'url', data: { url: '' } };
     case 'text':
       return { type: 'text', data: { text: '' } };
     case 'phone':
@@ -132,10 +194,25 @@ export function getDefaultContentData(type: ContentType): ContentData {
         type: 'wifi',
         data: { ssid: '', password: '', encryption: 'WPA', hidden: false },
       };
+    case 'vcard':
+      return {
+        type: 'vcard',
+        data: {
+          firstName: '',
+          lastName: '',
+          phone: '',
+          email: '',
+          company: '',
+          website: '',
+        },
+      };
+    case 'app':
+      return { type: 'app', data: { iosUrl: '', androidUrl: '' } };
+    default:
+      return { type: 'url', data: { url: '' } };
   }
 }
 
-/** Sanitize user-provided filename for download. */
 export function sanitizeFilename(name: string): string {
   const cleaned = name
     .trim()
@@ -143,4 +220,19 @@ export function sanitizeFilename(name: string): string {
     .replace(/\s+/g, '-')
     .slice(0, 100);
   return cleaned || 'qr-code';
+}
+
+export function getPreviewUrl(content: ContentData): string | null {
+  if (isLinkContent(content)) {
+    const url = content.data.url.trim();
+    return url ? normalizeUrl(url).replace(/^https?:\/\//i, '') : null;
+  }
+  if (content.type === 'vcard' && content.data.website.trim()) {
+    return normalizeUrl(content.data.website).replace(/^https?:\/\//i, '');
+  }
+  if (content.type === 'app') {
+    const url = content.data.iosUrl.trim() || content.data.androidUrl.trim();
+    return url ? normalizeUrl(url).replace(/^https?:\/\//i, '') : null;
+  }
+  return null;
 }
