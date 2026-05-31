@@ -1,60 +1,27 @@
 import { Sparkles, QrCode, ScanLine, Zap, Shield, Infinity } from 'lucide-react';
 
-/** Decorative QR-style grid for the hero visual. */
+/** Hero QR visual — uses branded scan-me artwork. */
 function HeroQrVisual() {
-  const pattern = [
-    [1, 1, 1, 0, 1, 0, 1, 1, 1],
-    [1, 0, 1, 0, 0, 1, 1, 0, 1],
-    [1, 1, 1, 0, 1, 0, 1, 1, 1],
-    [0, 0, 0, 1, 0, 1, 0, 0, 0],
-    [1, 0, 1, 1, 0, 0, 1, 0, 1],
-    [0, 1, 0, 0, 1, 1, 0, 1, 0],
-    [1, 1, 1, 0, 1, 0, 1, 1, 1],
-    [1, 0, 1, 1, 0, 1, 1, 0, 1],
-    [1, 1, 1, 0, 1, 0, 1, 1, 1],
-  ];
-
   return (
-    <div className="relative isolate mx-auto w-full max-w-[240px] md:max-w-[260px] lg:max-w-[300px] xl:max-w-[320px]">
-      {/* Glow stays behind the card — no negative inset so it cannot bleed over CTAs above */}
+    <div className="relative isolate mx-auto w-full max-w-[220px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[300px] xl:max-w-[320px]">
       <div
         className="pointer-events-none absolute inset-0 -z-10 rounded-3xl bg-brand-400/25 blur-xl md:bg-brand-400/20 md:blur-2xl"
         aria-hidden
       />
-      <div className="relative rounded-2xl border border-white/60 bg-white/90 p-4 shadow-2xl shadow-brand-500/20 backdrop-blur-sm sm:p-5">
-        <div className="mb-3 flex items-center justify-between">
-          <span className="text-xs font-semibold uppercase tracking-wider text-brand-600">
-            Live preview
-          </span>
-          <span className="rounded-full bg-green-100 px-2 py-0.5 text-[10px] font-bold text-green-700">
-            STATIC
-          </span>
-        </div>
-        <div className="rounded-xl bg-white p-3 shadow-inner sm:p-4">
-          <div
-            className="grid gap-[3px]"
-            style={{ gridTemplateColumns: `repeat(${pattern[0].length}, 1fr)` }}
-          >
-            {pattern.flatMap((row, y) =>
-              row.map((cell, x) => (
-                <div
-                  key={`${x}-${y}`}
-                  className={[
-                    'aspect-square rounded-[2px]',
-                    cell ? 'bg-slate-900' : 'bg-transparent',
-                  ].join(' ')}
-                />
-              )),
-            )}
-          </div>
-        </div>
-        <a
-          href="#qr-scanner"
-          className="mt-3 block rounded-lg bg-brand-600 px-3 py-2 text-center text-xs font-bold text-white transition-colors hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
-        >
-          SCAN ME
-        </a>
-      </div>
+      <a
+        href="#qr-scanner"
+        className="block rounded-2xl bg-white p-3 shadow-2xl shadow-brand-500/25 transition-transform hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-700 sm:p-4"
+        aria-label="Scan a QR code with our built-in scanner"
+      >
+        <img
+          src="/hero-scan-me-qr.png"
+          alt="Example QR code with Scan Me label"
+          className="h-auto w-full"
+          width={640}
+          height={640}
+          decoding="async"
+        />
+      </a>
     </div>
   );
 }
@@ -125,11 +92,11 @@ export function HeroSection() {
               id="hero-heading"
               className="text-[clamp(1.75rem,6vw,4.5rem)] font-bold leading-[1.1] tracking-tight text-white"
             >
-              Create &amp; scan{' '}
+              Create &amp; Scan{' '}
               <span className="bg-gradient-to-r from-brand-200 to-white bg-clip-text text-transparent">
-                QR codes
+                QR Codes
               </span>{' '}
-              in seconds
+              In Seconds
             </h1>
 
             <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-brand-100 sm:mt-4 sm:text-base md:mx-0 md:max-w-xl lg:text-lg xl:text-xl">

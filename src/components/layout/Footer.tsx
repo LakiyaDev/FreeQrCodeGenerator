@@ -157,11 +157,11 @@ export function Footer() {
       </div>
 
       <div className="relative z-10 border-t border-white/10 pb-[env(safe-area-inset-bottom)]">
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-2 px-4 py-5 text-xs sm:grid sm:grid-cols-2 sm:items-center sm:gap-3 sm:px-6 sm:py-6 sm:text-sm lg:px-8">
-          <span className="text-center font-medium text-white sm:text-left">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-2 px-4 py-5 text-xs sm:px-6 sm:py-6 sm:text-sm lg:px-8">
+          <span className="w-full text-center font-medium text-white">
             Free QR Generator
           </span>
-          <span className="max-w-sm text-center leading-relaxed text-brand-100 sm:max-w-none sm:text-right">
+          <span className="w-full max-w-sm text-center leading-relaxed text-brand-100 sm:max-w-none">
             © {year} Free QR Generator. Developed by LakiyaDeV. All rights reserved.
           </span>
         </div>
