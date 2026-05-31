@@ -43,9 +43,10 @@ export function ActionButtons({
   };
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="grid w-full grid-cols-2 gap-2">
       <Button
         variant="secondary"
+        fullWidth
         disabled={!encodedValue || disabled}
         onClick={handleCopy}
         aria-label="Copy encoded content"
@@ -62,7 +63,7 @@ export function ActionButtons({
           </>
         )}
       </Button>
-      <Button variant="ghost" onClick={onGenerateNew}>
+      <Button variant="secondary" fullWidth onClick={onGenerateNew}>
         <RotateCcw className="h-4 w-4" />
         Generate New QR
       </Button>

@@ -177,32 +177,34 @@ export function QrGenerator() {
         </div>
 
         <div className="lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-card dark:border-slate-700 dark:bg-slate-800/50 dark:shadow-card-dark">
-            <QrPreview
-              encodedValue={encodedValue}
-              customization={customization}
-              onCanvasReady={handleCanvasReady}
-            />
-
-            <div className="mt-6 space-y-4">
-              <DownloadMenu
-                canvases={canvases}
-                customization={customization}
-                displayLabel={displayLabel}
-                disabled={!encodedValue}
-              />
-              <ActionButtons
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-card">
+            <div className="mx-auto flex w-full max-w-[320px] flex-col items-center">
+              <QrPreview
                 encodedValue={encodedValue}
-                onGenerateNew={handleGenerateNew}
+                customization={customization}
+                onCanvasReady={handleCanvasReady}
               />
-              {encodedValue && (
-                <ShareButtons
-                  encodedValue={encodedValue}
+
+              <div className="mt-6 w-full space-y-4">
+                <DownloadMenu
+                  canvases={canvases}
+                  customization={customization}
                   displayLabel={displayLabel}
-                  qrCanvas={canvases?.framed ?? null}
-                  filename={filename}
+                  disabled={!encodedValue}
                 />
-              )}
+                <ActionButtons
+                  encodedValue={encodedValue}
+                  onGenerateNew={handleGenerateNew}
+                />
+                {encodedValue && (
+                  <ShareButtons
+                    encodedValue={encodedValue}
+                    displayLabel={displayLabel}
+                    qrCanvas={canvases?.framed ?? null}
+                    filename={filename}
+                  />
+                )}
+              </div>
             </div>
           </div>
         </div>

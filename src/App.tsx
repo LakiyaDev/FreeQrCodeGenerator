@@ -7,11 +7,9 @@ import { FaqSection } from '@/components/marketing/FaqSection';
 import { QrGenerator } from '@/components/generator/QrGenerator';
 import { HistorySection } from '@/components/history/HistorySection';
 import { QrHistoryProvider, useQrHistoryContext } from '@/context/QrHistoryContext';
-import { useDarkMode } from '@/hooks/useDarkMode';
 import type { QrHistoryItem } from '@/types';
 
 function AppContent() {
-  const { isDark, toggle } = useDarkMode();
   const { history, removeItem, clear } = useQrHistoryContext();
   const [restoreKey, setRestoreKey] = useState(0);
 
@@ -22,8 +20,8 @@ function AppContent() {
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col bg-white dark:bg-slate-950">
-      <Header isDark={isDark} onToggleDark={toggle} />
+    <div className="flex min-h-screen flex-col bg-white">
+      <Header />
 
       <main className="flex-1">
         <HeroSection />

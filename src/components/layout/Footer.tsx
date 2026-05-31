@@ -42,7 +42,7 @@ export function Footer() {
           </div>
         </div>
         <p className="mt-10 text-center text-xs text-slate-500 dark:text-slate-500">
-          © {year} Free QR Code Generator. Built with React &amp; Tailwind CSS.
+          © {year} Free QR Code Generator | Developed by LakiyaDeV
         </p>
       </div>
     </footer>
