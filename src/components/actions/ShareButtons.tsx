@@ -25,12 +25,14 @@ interface ShareButtonsProps {
 }
 
 const ICONS: Record<string, React.ReactNode> = {
-  whatsapp: <MessageCircle className="h-4 w-4" />,
-  facebook: <Facebook className="h-4 w-4" />,
-  twitter: <Twitter className="h-4 w-4" />,
-  linkedin: <Linkedin className="h-4 w-4" />,
-  telegram: <Send className="h-4 w-4" />,
-  email: <Mail className="h-4 w-4" />,
+  share: <Share2 className="h-4 w-4 shrink-0" />,
+  whatsapp: <MessageCircle className="h-4 w-4 shrink-0" />,
+  facebook: <Facebook className="h-4 w-4 shrink-0" />,
+  twitter: <Twitter className="h-4 w-4 shrink-0" />,
+  linkedin: <Linkedin className="h-4 w-4 shrink-0" />,
+  telegram: <Send className="h-4 w-4 shrink-0" />,
+  email: <Mail className="h-4 w-4 shrink-0" />,
+  instagram: <Instagram className="h-4 w-4 shrink-0" />,
 };
 
 export function ShareButtons({
@@ -41,6 +43,7 @@ export function ShareButtons({
   disabled,
 }: ShareButtonsProps) {
   const shareText = `Check out this QR code for "${displayLabel}": ${encodedValue}`;
+  const canNativeShare = typeof navigator !== 'undefined' && 'share' in navigator;
 
   const handleNativeShare = async () => {
     if (!qrCanvas) return;
@@ -54,48 +57,46 @@ export function ShareButtons({
     alert(INSTAGRAM_NOTE);
   };
 
+  const shareItems = [
+    {
+      id: 'share',
+      label: 'Share',
+      onClick: handleNativeShare,
+      disabled: disabled || !qrCanvas || !canNativeShare,
+    },
+    ...SHARE_PLATFORMS.map((platform) => ({
+      id: platform.id,
+      label: platform.label,
+      onClick: () => openShareWindow(platform.getShareUrl(shareText, encodedValue)),
+      disabled,
+    })),
+    {
+      id: 'instagram',
+      label: 'Instagram',
+      onClick: handleInstagram,
+      disabled,
+    },
+  ];
+
   return (
-    <div className="space-y-3">
-      <p className="text-sm font-medium text-slate-700 dark:text-slate-200">
-        Share QR code
-      </p>
-      <div className="flex flex-wrap gap-2">
-        {'share' in navigator && (
+    <div className="space-y-3 pt-1">
+      <p className="text-sm font-medium text-slate-700">Share QR code</p>
+      <div className="grid grid-cols-4 grid-rows-2 gap-2">
+        {shareItems.map((item) => (
           <Button
+            key={item.id}
             variant="secondary"
             size="sm"
-            disabled={disabled || !qrCanvas}
-            onClick={handleNativeShare}
+            fullWidth
+            disabled={item.disabled}
+            onClick={item.onClick}
+            aria-label={`Share on ${item.label}`}
+            className="min-h-[3.25rem] flex-col gap-1 px-1 py-2 text-[11px] leading-tight sm:min-h-11 sm:flex-row sm:gap-1.5 sm:px-2 sm:text-xs"
           >
-            <Share2 className="h-4 w-4" />
-            Share
-          </Button>
-        )}
-        {SHARE_PLATFORMS.map((platform) => (
-          <Button
-            key={platform.id}
-            variant="secondary"
-            size="sm"
-            disabled={disabled}
-            onClick={() =>
-              openShareWindow(platform.getShareUrl(shareText, encodedValue))
-            }
-            aria-label={`Share on ${platform.label}`}
-          >
-            {ICONS[platform.id]}
-            <span className="hidden sm:inline">{platform.label}</span>
+            {ICONS[item.id]}
+            <span className="text-center">{item.label}</span>
           </Button>
         ))}
-        <Button
-          variant="secondary"
-          size="sm"
-          disabled={disabled}
-          onClick={handleInstagram}
-          aria-label="Share on Instagram"
-        >
-          <Instagram className="h-4 w-4" />
-          <span className="hidden sm:inline">Instagram</span>
-        </Button>
       </div>
     </div>
   );

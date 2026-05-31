@@ -20,10 +20,10 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section aria-labelledby="how-it-works" className="py-16">
+    <section id="how-it-works" aria-labelledby="how-it-works-heading" className="scroll-mt-20 py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2
-          id="how-it-works"
+          id="how-it-works-heading"
           className="mb-10 text-center text-2xl font-bold text-slate-900 dark:text-white"
         >
           How it works

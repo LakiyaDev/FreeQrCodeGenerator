@@ -103,9 +103,6 @@ export function QrPreview({
           aria-label="Generated QR code preview"
         />
       </div>
-      <p className="mt-3 text-center text-xs text-slate-500">
-        Static QR — encodes your data directly, never expires
-      </p>
     </div>
   );
 }

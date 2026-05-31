@@ -178,14 +178,16 @@ export function QrGenerator() {
 
         <div className="lg:sticky lg:top-24 lg:self-start">
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-card">
-            <div className="mx-auto flex w-full max-w-[320px] flex-col items-center">
-              <QrPreview
-                encodedValue={encodedValue}
-                customization={customization}
-                onCanvasReady={handleCanvasReady}
-              />
+            <div className="flex w-full flex-col">
+              <div className="mx-auto w-full max-w-[320px]">
+                <QrPreview
+                  encodedValue={encodedValue}
+                  customization={customization}
+                  onCanvasReady={handleCanvasReady}
+                />
+              </div>
 
-              <div className="mt-6 w-full space-y-4">
+              <div className="mt-6 w-full space-y-3">
                 <DownloadMenu
                   canvases={canvases}
                   customization={customization}

@@ -44,9 +44,12 @@ function HeroQrVisual() {
             )}
           </div>
         </div>
-        <div className="mt-3 rounded-lg bg-brand-600 px-3 py-2 text-center text-xs font-bold text-white">
+        <a
+          href="#qr-scanner"
+          className="mt-3 block rounded-lg bg-brand-600 px-3 py-2 text-center text-xs font-bold text-white transition-colors hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
+        >
           SCAN ME
-        </div>
+        </a>
       </div>
     </div>
   );
@@ -138,20 +141,20 @@ export function HeroSection() {
               or scan any code with your camera. Free forever, works offline.
             </p>
 
-            <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:justify-center md:justify-start">
+            <div className="mt-7 grid grid-cols-1 gap-3 sm:mt-8 sm:grid-cols-2 md:max-w-xl">
               <a
                 href="#choose-type"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-white px-8 text-base font-semibold text-brand-700 shadow-lg shadow-black/20 transition-colors hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-700"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-white px-6 text-base font-semibold text-brand-700 shadow-lg shadow-black/20 transition-colors hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-700 sm:px-8"
               >
-                <QrCode className="h-5 w-5" aria-hidden />
+                <QrCode className="h-5 w-5 shrink-0" aria-hidden />
                 Generate QR Codes
               </a>
               <a
-                href="#qr-scanner"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border-2 border-white/30 bg-white/10 px-8 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-700"
+                href="#how-it-works"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg border-2 border-white/30 bg-white/10 px-6 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-700 sm:px-8"
               >
-                <ScanLine className="h-5 w-5" aria-hidden />
-                Scan QR Codes
+                <ScanLine className="h-5 w-5 shrink-0" aria-hidden />
+                How it Use
               </a>
             </div>
 

@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { HeroSection } from '@/components/marketing/HeroSection';
 import { ChooseTypeSection } from '@/components/marketing/ChooseTypeSection';
 import { HowItWorks } from '@/components/marketing/HowItWorks';
+import { FeaturesSection } from '@/components/marketing/FeaturesSection';
 import { FaqSection } from '@/components/marketing/FaqSection';
 import { HistorySection } from '@/components/history/HistorySection';
 import { useQrHistoryContext } from '@/context/QrHistoryContext';
@@ -65,6 +66,7 @@ export function HomePage() {
       <Suspense fallback={<ScannerFallback />}>
         <QrScannerSection />
       </Suspense>
+      <FeaturesSection />
       <FaqSection />
     </>
   );

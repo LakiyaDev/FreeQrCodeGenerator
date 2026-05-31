@@ -277,50 +277,45 @@ export function CreateQrPage() {
         )}
 
         {step === 3 && (
-          <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-            <div className="space-y-6">
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                <h2 className="mb-4 text-lg font-semibold text-slate-900">
-                  Design your QR code
-                </h2>
-                <CustomizationPanel
-                  customization={customization}
-                  onChange={handleCustomizationChange}
-                />
-              </div>
+          <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-10 xl:gap-12">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:min-h-full">
+              <h2 className="mb-4 text-lg font-semibold text-slate-900">
+                Design your QR code
+              </h2>
+              <CustomizationPanel
+                customization={customization}
+                onChange={handleCustomizationChange}
+              />
             </div>
 
-            <div className="lg:sticky lg:top-24 lg:self-start">
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                <div className="mx-auto flex w-full max-w-[320px] flex-col items-center">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:sticky lg:top-24 lg:self-start">
+              <div className="flex w-full flex-col">
+                <div className="mx-auto w-full max-w-[320px]">
                   <QrPreview
                     encodedValue={encodedValue}
                     customization={customization}
                     onCanvasReady={handleCanvasReady}
                   />
-                  <p className="mt-3 text-center text-xs text-slate-500">
-                    Static QR — encodes your data directly, never expires.
-                  </p>
-                  <div className="mt-6 w-full space-y-4">
-                    <DownloadMenu
-                      canvases={canvases}
-                      customization={customization}
-                      displayLabel={displayLabel}
-                      disabled={!encodedValue}
-                    />
-                    <ActionButtons
+                </div>
+                <div className="mt-6 w-full space-y-3">
+                  <DownloadMenu
+                    canvases={canvases}
+                    customization={customization}
+                    displayLabel={displayLabel}
+                    disabled={!encodedValue}
+                  />
+                  <ActionButtons
+                    encodedValue={encodedValue}
+                    onGenerateNew={handleGenerateNew}
+                  />
+                  {encodedValue && (
+                    <ShareButtons
                       encodedValue={encodedValue}
-                      onGenerateNew={handleGenerateNew}
+                      displayLabel={displayLabel}
+                      qrCanvas={canvases?.framed ?? null}
+                      filename={filename}
                     />
-                    {encodedValue && (
-                      <ShareButtons
-                        encodedValue={encodedValue}
-                        displayLabel={displayLabel}
-                        qrCanvas={canvases?.framed ?? null}
-                        filename={filename}
-                      />
-                    )}
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
