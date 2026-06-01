@@ -14,7 +14,32 @@
 
 **[Try it live](https://freeqrcodegen.vercel.app/)**
 
+Developed by [LakiyaDeV](https://github.com/LakiyaDev)
+
 </div>
+
+---
+
+## Links
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th align="left" width="28%">Resource</th>
+      <th align="left" width="72%">URL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Live app</td>
+      <td><a href="https://freeqrcodegen.vercel.app/">https://freeqrcodegen.vercel.app/</a></td>
+    </tr>
+    <tr>
+      <td>Repository</td>
+      <td><a href="https://github.com/LakiyaDev/FreeQrCodeGenerator">https://github.com/LakiyaDev/FreeQrCodeGenerator</a></td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
@@ -113,30 +138,91 @@ flowchart LR
     History --> UI
 ```
 
-| Concern | Approach |
-|---------|----------|
-| Routing | React Router — `/` homepage, `/create/:slug` wizard |
-| State | React hooks + `QrHistoryContext` |
-| QR rendering | `qr-code-styling` canvas/SVG output |
-| PDF export | jsPDF + canvas rasterization |
-| Persistence | `localStorage` only — no database |
-| Hosting | Static files on Vercel or Netlify (SPA rewrites) |
+<table width="100%">
+  <thead>
+    <tr>
+      <th align="left" width="28%">Concern</th>
+      <th align="left" width="72%">Approach</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Routing</td>
+      <td>React Router — <code>/</code> homepage, <code>/create/:slug</code> wizard</td>
+    </tr>
+    <tr>
+      <td>State</td>
+      <td>React hooks + <code>QrHistoryContext</code></td>
+    </tr>
+    <tr>
+      <td>QR rendering</td>
+      <td><code>qr-code-styling</code> canvas/SVG output</td>
+    </tr>
+    <tr>
+      <td>PDF export</td>
+      <td>jsPDF + canvas rasterization</td>
+    </tr>
+    <tr>
+      <td>Persistence</td>
+      <td><code>localStorage</code> only — no database</td>
+    </tr>
+    <tr>
+      <td>Hosting</td>
+      <td>Static files on Vercel or Netlify (SPA rewrites)</td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| Framework | React 19 + TypeScript 5.8 |
-| Build | Vite 6 |
-| Routing | React Router 7 |
-| Styling | Tailwind CSS 3 + Inter font |
-| QR engine | [qr-code-styling](https://www.npmjs.com/package/qr-code-styling) |
-| Scanner | [html5-qrcode](https://www.npmjs.com/package/html5-qrcode) |
-| PDF export | [jsPDF](https://github.com/parallax/jsPDF) |
-| Icons | [Lucide React](https://lucide.dev) |
-| Deployment | [Vercel](https://vercel.com/) (primary) · Netlify supported |
+<table width="100%">
+  <thead>
+    <tr>
+      <th align="left" width="28%">Layer</th>
+      <th align="left" width="72%">Technology</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Framework</td>
+      <td>React 19 + TypeScript 5.8</td>
+    </tr>
+    <tr>
+      <td>Build</td>
+      <td>Vite 6</td>
+    </tr>
+    <tr>
+      <td>Routing</td>
+      <td>React Router 7</td>
+    </tr>
+    <tr>
+      <td>Styling</td>
+      <td>Tailwind CSS 3 + Inter font</td>
+    </tr>
+    <tr>
+      <td>QR engine</td>
+      <td><a href="https://www.npmjs.com/package/qr-code-styling">qr-code-styling</a></td>
+    </tr>
+    <tr>
+      <td>Scanner</td>
+      <td><a href="https://www.npmjs.com/package/html5-qrcode">html5-qrcode</a></td>
+    </tr>
+    <tr>
+      <td>PDF export</td>
+      <td><a href="https://github.com/parallax/jsPDF">jsPDF</a></td>
+    </tr>
+    <tr>
+      <td>Icons</td>
+      <td><a href="https://lucide.dev">Lucide React</a></td>
+    </tr>
+    <tr>
+      <td>Deployment</td>
+      <td><a href="https://vercel.com/">Vercel</a> (primary) · Netlify supported</td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
@@ -172,20 +258,77 @@ Output is written to `dist/`.
 
 ## QR Content Types
 
-| Type | Route slug | Encoded as |
-|------|------------|------------|
-| Website URL | `website-url` | `https://…` |
-| vCard | `vcard` | vCard contact string |
-| PDF | `pdf` | URL to hosted PDF |
-| Images | `images` | URL to gallery |
-| Social Media | `social-media` | Profile / link URL |
-| Video | `video` | YouTube, Vimeo, etc. |
-| Simple Text | `text` | Plain text |
-| Wi-Fi | `wifi` | `WIFI:T:…;S:…;P:…;;` |
-| App | `app` | App Store / Play Store URLs |
-| Menu | `menu` | Digital menu URL |
-| Phone | `phone` | `tel:+…` |
-| Email | `email` | `mailto:…?subject=…&body=…` |
+<table width="100%">
+  <thead>
+    <tr>
+      <th align="left" width="28%">Type</th>
+      <th align="left" width="22%">Route slug</th>
+      <th align="left" width="50%">Encoded as</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Website URL</td>
+      <td><code>website-url</code></td>
+      <td><code>https://…</code></td>
+    </tr>
+    <tr>
+      <td>vCard</td>
+      <td><code>vcard</code></td>
+      <td>vCard contact string</td>
+    </tr>
+    <tr>
+      <td>PDF</td>
+      <td><code>pdf</code></td>
+      <td>URL to hosted PDF</td>
+    </tr>
+    <tr>
+      <td>Images</td>
+      <td><code>images</code></td>
+      <td>URL to image gallery</td>
+    </tr>
+    <tr>
+      <td>Social Media</td>
+      <td><code>social-media</code></td>
+      <td>Profile or link page URL</td>
+    </tr>
+    <tr>
+      <td>Video</td>
+      <td><code>video</code></td>
+      <td>YouTube, Vimeo, or other video URL</td>
+    </tr>
+    <tr>
+      <td>Simple Text</td>
+      <td><code>text</code></td>
+      <td>Plain text message</td>
+    </tr>
+    <tr>
+      <td>Wi-Fi</td>
+      <td><code>wifi</code></td>
+      <td><code>WIFI:T:…;S:…;P:…;;</code></td>
+    </tr>
+    <tr>
+      <td>App</td>
+      <td><code>app</code></td>
+      <td>App Store / Google Play URLs</td>
+    </tr>
+    <tr>
+      <td>Menu</td>
+      <td><code>menu</code></td>
+      <td>Digital restaurant menu URL</td>
+    </tr>
+    <tr>
+      <td>Phone</td>
+      <td><code>phone</code></td>
+      <td><code>tel:+…</code></td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td><code>email</code></td>
+      <td><code>mailto:…?subject=…&amp;body=…</code></td>
+    </tr>
+  </tbody>
+</table>
 
 Unlike dynamic QR services that use short redirect URLs, every code above embeds the payload **directly** — so it keeps working even if this website goes offline.
 
@@ -234,12 +377,32 @@ Unlike dynamic QR services that use short redirect URLs, every code above embeds
 
 ## Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start Vite dev server (port 5173) |
-| `npm run build` | Type-check + production build → `dist/` |
-| `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint |
+<table width="100%">
+  <thead>
+    <tr>
+      <th align="left" width="28%">Command</th>
+      <th align="left" width="72%">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>npm run dev</code></td>
+      <td>Start Vite dev server (port 5173)</td>
+    </tr>
+    <tr>
+      <td><code>npm run build</code></td>
+      <td>Type-check + production build → <code>dist/</code></td>
+    </tr>
+    <tr>
+      <td><code>npm run preview</code></td>
+      <td>Preview production build locally</td>
+    </tr>
+    <tr>
+      <td><code>npm run lint</code></td>
+      <td>Run ESLint</td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
@@ -249,22 +412,65 @@ Unlike dynamic QR services that use short redirect URLs, every code above embeds
 
 The live site is deployed at **[freeqrcodegen.vercel.app](https://freeqrcodegen.vercel.app/)**.
 
-1. Push the repo to GitHub
-2. Import at [vercel.com/new](https://vercel.com/new)
-3. Vite is auto-detected — build: `npm run build`, output: `dist`
-4. `vercel.json` handles SPA routing
-
-```bash
-npx vercel
-```
+<table width="100%">
+  <thead>
+    <tr>
+      <th align="left" width="28%">Setting</th>
+      <th align="left" width="72%">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Import</td>
+      <td><a href="https://vercel.com/new">vercel.com/new</a> — connect GitHub repo</td>
+    </tr>
+    <tr>
+      <td>Build command</td>
+      <td><code>npm run build</code></td>
+    </tr>
+    <tr>
+      <td>Output directory</td>
+      <td><code>dist</code></td>
+    </tr>
+    <tr>
+      <td>SPA routing</td>
+      <td>Handled by <code>vercel.json</code></td>
+    </tr>
+    <tr>
+      <td>CLI deploy</td>
+      <td><code>npx vercel</code></td>
+    </tr>
+  </tbody>
+</table>
 
 ### Netlify
 
-1. Connect the repo at [app.netlify.com](https://app.netlify.com)
-2. Build command: `npm run build`
-3. Publish directory: `dist`
-
-`netlify.toml` is included with SPA redirect rules.
+<table width="100%">
+  <thead>
+    <tr>
+      <th align="left" width="28%">Setting</th>
+      <th align="left" width="72%">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Import</td>
+      <td><a href="https://app.netlify.com">app.netlify.com</a> — connect GitHub repo</td>
+    </tr>
+    <tr>
+      <td>Build command</td>
+      <td><code>npm run build</code></td>
+    </tr>
+    <tr>
+      <td>Publish directory</td>
+      <td><code>dist</code></td>
+    </tr>
+    <tr>
+      <td>SPA routing</td>
+      <td>Handled by <code>netlify.toml</code></td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
@@ -282,15 +488,38 @@ Once generated, your QR code works forever without depending on Free QR Generato
 
 ## Privacy
 
-- **No accounts** — nothing to sign up for
-- **No server uploads** — generation and scanning happen client-side
-- **No analytics required** — the core app has no mandatory tracking
-- **Local history only** — stored in your browser's `localStorage`, clearable anytime
-
-Camera access is requested only when you open the scanner and can be revoked in browser settings.
+<table width="100%">
+  <thead>
+    <tr>
+      <th align="left" width="28%">Topic</th>
+      <th align="left" width="72%">Policy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Accounts</td>
+      <td>No signup required — nothing to register for</td>
+    </tr>
+    <tr>
+      <td>Data uploads</td>
+      <td>Generation and scanning happen entirely client-side</td>
+    </tr>
+    <tr>
+      <td>Analytics</td>
+      <td>No mandatory tracking in the core app</td>
+    </tr>
+    <tr>
+      <td>History</td>
+      <td>Stored in browser <code>localStorage</code>; clearable anytime</td>
+    </tr>
+    <tr>
+      <td>Camera</td>
+      <td>Requested only when the scanner is opened; revocable in browser settings</td>
+    </tr>
+  </tbody>
+</table>
 
 ---
-
 
 ## License
 
@@ -299,8 +528,6 @@ Camera access is requested only when you open the scanner and can be revoked in 
 For licensing questions, open an issue on the [repository](https://github.com/LakiyaDev/FreeQrCodeGenerator).
 
 <div align="center">
-
----
 
 Built for everyone who needs QR codes without subscriptions, redirects, or expiry dates.
 
