@@ -3,8 +3,9 @@
 # Free QR Code Generator
 
 ### Create Static QR Codes In Seconds.
+<img src="https://github.com/LakiyaDev/FreeQrCodeGenerator/blob/main/public/favicon.svg" alt="Free QR Code Generator" width="150px" height="150px"/>
 
-**Generate, customize, download, and scan QR codes — entirely in your browser. No account. No expiry. No server.**
+**Generate, Customize, Download and Scan QR codes — Entirely in your browser. No account. No expiry. No server.**
 
 [![Live Demo](https://img.shields.io/badge/Live-freeqrcodegen.vercel.app-22c55e?logo=vercel)](https://freeqrcodegen.vercel.app/)
 [![React](https://img.shields.io/badge/React-19-61dafb?logo=react)](https://react.dev/)
@@ -14,32 +15,7 @@
 
 **[Try it live](https://freeqrcodegen.vercel.app/)**
 
-Developed by [LakiyaDeV](https://github.com/LakiyaDev)
-
 </div>
-
----
-
-## Links
-
-<table width="100%">
-  <thead>
-    <tr>
-      <th align="left" width="28%">Resource</th>
-      <th align="left" width="72%">URL</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Live app</td>
-      <td><a href="https://freeqrcodegen.vercel.app/">https://freeqrcodegen.vercel.app/</a></td>
-    </tr>
-    <tr>
-      <td>Repository</td>
-      <td><a href="https://github.com/LakiyaDev/FreeQrCodeGenerator">https://github.com/LakiyaDev/FreeQrCodeGenerator</a></td>
-    </tr>
-  </tbody>
-</table>
 
 ---
 
@@ -527,10 +503,19 @@ Once generated, your QR code works forever without depending on Free QR Generato
 
 For licensing questions, open an issue on the [repository](https://github.com/LakiyaDev/FreeQrCodeGenerator).
 
+---
+
 <div align="center">
+  
+<a href="https://freeqrcodegen.vercel.app/" target="_blank">
+  <img
+    src="https://github.com/LakiyaDev/FreeQrCodeGenerator/blob/main/public/favicon.svg"
+    alt="Free QR Code Generator"
+    width="150"
+    height="150"
+  />
+</a>
 
-Built for everyone who needs QR codes without subscriptions, redirects, or expiry dates.
-
-**[freeqrcodegen.vercel.app](https://freeqrcodegen.vercel.app/)**
+Built for everyone who needs QR codes without subscriptions, redirects or expiry dates.
 
 </div>
