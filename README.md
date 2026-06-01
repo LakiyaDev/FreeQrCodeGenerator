@@ -12,20 +12,9 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178c6?logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38bdf8?logo=tailwindcss)](https://tailwindcss.com/)
 
-**[Try it live →](https://freeqrcodegen.vercel.app/)**
-
-Developed by [LakiyaDeV](https://github.com/LakiyaDev)
+**[Try it live](https://freeqrcodegen.vercel.app/)**
 
 </div>
-
----
-
-## Links
-
-| | |
-|---|---|
-| Live app | <https://freeqrcodegen.vercel.app/> |
-| Repository | <https://github.com/LakiyaDev/FreeQrCodeGenerator> |
 
 ---
 
@@ -43,7 +32,6 @@ Developed by [LakiyaDeV](https://github.com/LakiyaDev)
 - [Deployment](#deployment)
 - [How Static QR Codes Work](#how-static-qr-codes-work)
 - [Privacy](#privacy)
-- [Contributing](#contributing)
 - [License](#license)
 
 ---
@@ -303,16 +291,6 @@ Camera access is requested only when you open the scanner and can be revoked in 
 
 ---
 
-## Contributing
-
-Contributions are welcome.
-
-1. Fork the repo and create a branch from `main`
-2. Run `npm install` and `npm run lint`
-3. Keep changes focused — match existing TypeScript and Tailwind patterns
-4. Open a pull request with a clear description and screenshots for UI changes
-
----
 
 ## License
 
@@ -321,6 +299,8 @@ Contributions are welcome.
 For licensing questions, open an issue on the [repository](https://github.com/LakiyaDev/FreeQrCodeGenerator).
 
 <div align="center">
+
+---
 
 Built for everyone who needs QR codes without subscriptions, redirects, or expiry dates.
 
